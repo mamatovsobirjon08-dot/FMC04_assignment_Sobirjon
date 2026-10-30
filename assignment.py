@@ -1,42 +1,41 @@
-def classify(value):
-    if value < 998:
-        return "Below range"
-    elif 998 <= value <= 1002:
-        return "In range"
-    else:
-        return "Above range"
+def replace_value(values, index, new_value):
+    values[index] = new_value
+def find_first(values, target):
+    for i in range(len(values)):
+        if values[i] == target:
+            return i
+        return -1
+def summarize(values):
+    tupple = (min(values), max(values), sum(values))
+    return tupple
 
+num_days = int(input("Enter the number of days: "))
+original = []
+for _ in range(num_days):
+    num_puzzles = int(input("Enter the number of pazzles solved: "))
+    original.append(num_puzzles)
+updated = original[:]
+a = int(input("Enter the index to correct: "))
+b = int(input("Enter the new number of pazzles: "))
+replace_value(updated, a, b)
+target = int(input("Enter the number of puzzles: "))
+first_index = find_first(updated, target)
+matching_count = updated.count(target)
+if first_index == -1:
+    index_str = "Target not found"
+else:
+    index_str = str(first_index) 
 
-def calculate_average(total, count):
-    return total / count
+minimum, maximum, total = summarize(updated)
+sorted_list = sorted(updated)   
 
+print(f"Original: {original}")
+print(f"Updated: {updated}")
+print(f"Sorted: {sorted_list}")
+print(f"Minimum number of puzzles: {minimum}")
+print(f"Maximum number of puzzles: {maximum}")
+print(f"Total number of puzzles: {total}")
+print(f"First matching index: {index_str}")
+print(f"Matching values: {matching_count}")
 
-packets = int(input("Enter the number of coffee packets: "))
-
-total_weight = 0
-below_range_count = 0
-in_range_count = 0
-above_range_count = 0
-
-for i in range(packets):
-        weight = int(input("Enter the coffee packet weight: "))
-
-        category = classify(weight)
-        print(category)
-
-        total_weight += weight
-
-        if category == "Below range":
-            below_range_count += 1
-        elif category == "In range":
-            in_range_count += 1
-        elif category == "Above range":
-            above_range_count += 1
-
-average_weight = calculate_average(total_weight, packets)
-
-print(f"Total weight: {total_weight} g")
-print(f"Average weight: {average_weight:} g")
-print(f"Below range: {below_range_count}")
-print(f"In range: {in_range_count}")
-print(f"Above range: {above_range_count}")
+ 
